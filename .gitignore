@@ -1,0 +1,23 @@
+# Build outputs
+**/bin/
+**/obj/
+
+# IDEs
+**/.vs/
+**/.vscode/
+**/.idea/
+
+# User-specific files
+**/*.user
+**/*.suo
+**/*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.bak

@@ -1,0 +1,20 @@
+services:
+  auth:
+    build:
+      context: ./MsAuth
+      dockerfile: Dockerfile
+    ports:
+      - "5004:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  apigateway:
+    build:
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - auth
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
