@@ -15,10 +15,16 @@ public class LoginHandler : IRequestHandler<LoginCommand, Result<LoginResult>>
 
     public Task<Result<LoginResult>> Handle(LoginCommand request, CancellationToken ct)
     {
-        if (request.Username != "admin" || request.Password != "password")
+        if (request.Username != "admin" || request.Password != "admin")
         {
-            return Task.FromResult(Result.Failure<LoginResult>("Invalid username or password"));
+            return Task.FromResult(Result.Failure<LoginResult>(
+                Error.Unauthorized(
+                    "InvalidCredentials",
+                    "The username or password is incorrect."
+                )
+            ));
         }
+
         var userId = Guid.NewGuid();
         var token = _jwtService.GenerateToken(userId.ToString());
         var result = new LoginResult { Token = token };
